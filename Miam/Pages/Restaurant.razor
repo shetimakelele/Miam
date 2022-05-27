@@ -1,0 +1,68 @@
+﻿@page "/restaurants"
+<h3 class="justify-content-center">  Les restaurants</h3>
+<!--on injecte comme le ferait dans un controleur-->
+@inject Miam.Data.IRestaurantService RestaurantService;
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>ici on mets des filtres</h3>
+        </div>
+        @foreach (var restaurant in restaurants)
+        {
+
+
+
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="@restaurant.ImageLink" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@restaurant.Nom</h5>
+                        <p class="card-text">@restaurant.Genre</p>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text">@restaurant.PrixMoyen</p>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-success">Voter</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+        }
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @code {
+
+            private List<Miam.Data.Restaurant> restaurants;
+
+            protected override void OnInitialized()
+            {
+                restaurants = RestaurantService.GetRestaurants();
+            }
+
+        }
